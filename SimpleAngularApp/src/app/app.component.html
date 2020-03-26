@@ -1,5 +1,7 @@
-<app-header #headerComponent></app-header>
-<app-page1 *ngIf="headerComponent.pageRequested === 1"></app-page1>
-<app-page2 *ngIf="headerComponent.pageRequested === 2"></app-page2>
-<app-page3 *ngIf="headerComponent.pageRequested === 3"></app-page3>
-<app-footer></app-footer>
+<app-header (pageChangedEvent)="incrementHitCounter($event)"></app-header>
+<app-page1 [hidden]="currentPage !== 1"></app-page1>
+<app-page2 #page2Component [hidden]="currentPage !== 2"></app-page2>
+<app-page3 [hidden]="currentPage !== 3"></app-page3>
+<!-- footer is the template reference and lastAccessed is the property of the child to be set-->
+<app-footer #footer [lastAccessed]="startTime"></app-footer>
+<button (click)="updateLastAccessed()">Update Last Accessed</button>
